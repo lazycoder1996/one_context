@@ -1,4 +1,4 @@
 analyze:
-	@dart format . \
+	@flutter format . \
 	&& flutter analyze \
-	&& dart run pana .
+	&& dart pub global run pana .

@@ -20,17 +20,6 @@
 
 ## 🎮  Let's start 
 
-## ⚠  Important: Configure MaterialApp. e.g.
-```dart
-/// important: Use [OneContext().builder] in `MaterialApp` builder, in order to show dialogs and overlays.
-/// important: Use [OneContext().key] in `MaterialApp` navigatorKey, in order to navigate.
-return MaterialApp(
-    builder: OneContext().builder,
-    navigatorKey: OneContext().key,
-    ...
-);
-```
-
 #### There are 2 ways to get OneContext singleton instance, OneContext() or OnceContext.intance. e.g.
 ```dart
     OneContext().pushNamed('/detail_page');
@@ -138,11 +127,6 @@ OneContext().push(MaterialPageRoute(builder: (_) => SecondPage()));
 ```dart
 // go back from second page
 OneContext().pop();
-```
-
-```dart
-// Pop dialogs
-OneContext().popDialog();
 ```
 
 ```dart
@@ -344,6 +328,17 @@ e.g.
 
 ```
 
+## ⚠  Important: Configure MaterialApp. e.g.
+```dart
+/// important: Use [OneContext().builder] in `MaterialApp` builder, in order to show dialogs and overlays.
+/// important: Use [OneContext().key] in `MaterialApp` navigatorKey, in order to navigate.
+return MaterialApp(
+    builder: OneContext().builder,
+    navigatorKey: OneContext().key,
+    ...
+);
+```
+
 ### In initState or inside class constructor (now it's possible)
 ```dart
 @override
@@ -360,7 +355,7 @@ e.g.
 
 
 ## 🚦  Warnings
-\* OneContext().theme and OneContext().mediaQuery are global instances of the root of the widget tree. Use it with care! It can reproduce unexpected behavior if you don't understand it.
+\* OneContex().theme and OneContex().mediaQuery are global instances of the root of the widget tree. Use it with care! It can reproduce unexpected behavior if you don't understand it.
 
 \* OneContext().context is like a root context, so, it should not be used directly, as it can reproduce unexpected behaviors, unless you have a understanding how it works. It shouldn't work well with InheritedWidget for example.
 
@@ -370,6 +365,3 @@ e.g.
 ## 👨‍💻👨‍💻  Contributing
 
 #### Contributions of any kind are welcome! I'll be glad to analyse and accept them! 👾
-### Sponsor
-<a href="https://www.buymeacoffee.com/emanuelbraz" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 217px !important;" ></a>
-

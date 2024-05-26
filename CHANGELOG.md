@@ -1,10 +1,3 @@
-## [4.0.0] - Feb 27, 2023
-- Update Flutter 3.19.1
-
-## [3.0.0-rc-1] - August 02, 2023
-* Update dialogs parameters
-* Update dart version 3.0.0
-
 ## [2.1.0] - Jul 30, 2022
 * Update dialogs parameters
 
