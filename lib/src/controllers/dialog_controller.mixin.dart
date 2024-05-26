@@ -192,9 +192,8 @@ mixin DialogController {
   ///
   /// Returns a controller that can be used to close and otherwise manipulate the
   /// bottom sheet.
-  Future<PersistentBottomSheetController<T>?> showBottomSheet<T>({
-    required BuildContext context,
-    required Widget Function(BuildContext) builder,
+  Future<PersistentBottomSheetController<T>?> showBottomSheet<T>(
+     Widget Function(BuildContext) builder,{
     Color? backgroundColor,
     double? elevation,
     ShapeBorder? shape,
