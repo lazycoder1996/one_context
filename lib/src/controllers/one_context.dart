@@ -91,9 +91,8 @@ class OneContext with NavigatorController, OverlayController, DialogController {
     ScaffoldFeatureController<SnackBar, SnackBarClosedReason> Function(
             SnackBar Function(BuildContext?) builder)?
         showSnackBar,
-    PersistentBottomSheetController<T> Function<T>({
-      required BuildContext context,
-      Widget Function(BuildContext)? builder,
+    PersistentBottomSheetController<T> Function<T>(
+      Widget Function(BuildContext) builder,{
       Color? backgroundColor,
       double? elevation,
       ShapeBorder? shape,

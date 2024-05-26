@@ -69,9 +69,8 @@ mixin DialogController {
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> Function(
       SnackBar Function(BuildContext?) builder)? _showSnackBar;
 
-  PersistentBottomSheetController<T> Function<T>({
-    required BuildContext context,
-    Widget Function(BuildContext) builder,
+  PersistentBottomSheetController<T> Function<T>(
+    Widget Function(BuildContext) builder, {
     Color? backgroundColor,
     double? elevation,
     ShapeBorder? shape,
@@ -97,7 +96,7 @@ mixin DialogController {
   }) async {
     if (!(await _contextLoaded())) return null;
 
-    Widget dialog = builder(context!);
+    Widget dialog = builder(context);
     if (barrierDismissible == true) addDialogVisible(dialog);
 
     return _showDialog!<T>(
@@ -164,7 +163,7 @@ mixin DialogController {
   }) async {
     if (!(await _contextLoaded())) return null;
 
-    Widget dialog = builder(context!);
+    Widget dialog = builder(context);
     if (isDismissible == true) addDialogVisible(dialog);
 
     return _showModalBottomSheet!<T>(
@@ -206,8 +205,7 @@ mixin DialogController {
   }) async {
     if (!(await _contextLoaded())) return null;
     return _showBottomSheet!<T>(
-      context: context,
-      builder: builder,
+      builder,
       backgroundColor: backgroundColor,
       elevation: elevation,
       shape: shape,
@@ -230,8 +228,7 @@ mixin DialogController {
         bool useSafeArea,
         RouteSettings? routeSettings,
         Offset? anchorPoint,
-      })?
-          showDialog,
+      })? showDialog,
       Future<T?> Function<T>({
         required BuildContext context,
         required Widget Function(BuildContext) builder,
@@ -248,14 +245,12 @@ mixin DialogController {
         RouteSettings? routeSettings,
         AnimationController? transitionAnimationController,
         Offset? anchorPoint,
-      })?
-          showModalBottomSheet,
+      })? showModalBottomSheet,
       ScaffoldFeatureController<SnackBar, SnackBarClosedReason> Function(
               SnackBar Function(BuildContext?) builder)?
           showSnackBar,
-      PersistentBottomSheetController<T> Function<T>({
-        required BuildContext context,
-        Widget Function(BuildContext)? builder,
+      PersistentBottomSheetController<T> Function<T>(
+        Widget Function(BuildContext) builder, {
         Color? backgroundColor,
         double? elevation,
         ShapeBorder? shape,
@@ -263,8 +258,7 @@ mixin DialogController {
         BoxConstraints? constraints,
         bool? enableDrag,
         AnimationController? transitionAnimationController,
-      })?
-          showBottomSheet}) {
+      })? showBottomSheet}) {
     _showDialog = showDialog;
     _showSnackBar = showSnackBar;
     _showModalBottomSheet = showModalBottomSheet;
