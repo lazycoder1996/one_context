@@ -75,14 +75,7 @@ class MyApp extends StatelessWidget {
                 ),
                 // routes: {'/second': (context) => SecondPage()},
                 onGenerateRoute: (settings) {
-                  if (settings.name == SecondPage.routeName) {
-                    return MaterialPageRoute<String>(
-                      builder: (context) {
-                        return SecondPage();
-                      },
-                    );
-                  } else
-                    return null;
+                  return null;
                 },
               );
             });
@@ -103,7 +96,6 @@ class MyApp2 extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.pink),
         title: 'OneContext Demo',
         home: MyHomePage2(title: 'A NEW APPLICATION'),
-        routes: {'/second': (context) => SecondPage()},
         builder: OneContext().builder,
         navigatorKey: OneContext().key);
   }
@@ -290,7 +282,7 @@ class _MyHomePageState extends State<MyHomePage>
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context!)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     ?.copyWith(color: Colors.white),
                               ),
                               action: SnackBarAction(
@@ -304,6 +296,7 @@ class _MyHomePageState extends State<MyHomePage>
                     showTipsOnScreen('OneContext().showDialog<String>()');
 
                     var result = await OneContext().showDialog<String>(
+                        context: context,
                         barrierColor: Colors.purple.withOpacity(0.5),
                         builder: (context) => AlertDialog(
                               title: new Text("The Title"),
@@ -345,6 +338,7 @@ class _MyHomePageState extends State<MyHomePage>
                         'OneContext().showModalBottomSheet<String>()');
                     var result =
                         await OneContext().showModalBottomSheet<String>(
+                            context: context,
                             barrierColor: Colors.amber.withOpacity(0.5),
                             builder: (context) => Container(
                                   child: Column(
@@ -372,6 +366,7 @@ class _MyHomePageState extends State<MyHomePage>
                   onPressed: () {
                     showTipsOnScreen('OneContext().showBottomSheet()');
                     OneContext().showBottomSheet(
+                      context: context,
                       constraints: BoxConstraints(maxHeight: 100),
                       builder: (context) => Container(
                         decoration: BoxDecoration(
@@ -395,6 +390,7 @@ class _MyHomePageState extends State<MyHomePage>
                     onPressed: () async {
                       showTipsOnScreen('OneContext().showDialog<int>()');
                       switch (await OneContext().showDialog<int>(
+                          context: context,
                           barrierDismissible: false,
                           builder: (BuildContext context) {
                             return SimpleDialog(
@@ -552,15 +548,6 @@ class _MyHomePageState extends State<MyHomePage>
                   },
                 ),
                 ElevatedButton(
-                  child: Text('Push a second page (push)'),
-                  onPressed: () async {
-                    showTipsOnScreen('OneContext().push()');
-                    String? result = await OneContext().push<String>(
-                        MaterialPageRoute(builder: (_) => SecondPage()));
-                    print('$result from OneContext().push()');
-                  },
-                ),
-                ElevatedButton(
                   child: Text('Push a second page (pushNamed)'),
                   onPressed: () async {
                     showTipsOnScreen('OneContext().pushNamed()');
@@ -592,7 +579,7 @@ class _MyHomePageState extends State<MyHomePage>
                     String info = 'platform: ${theme.platform}\n'
                         'primaryColor: ${theme.primaryColor}\n'
                         'accentColor: ${theme.colorScheme.secondary}\n'
-                        'title.color: ${theme.textTheme.headline6?.color}';
+                        'title.color: ${theme.textTheme.titleLarge?.color}';
                     print(info);
                     showTipsOnScreen(info, size: 200, seconds: 5);
                   },
@@ -605,47 +592,6 @@ class _MyHomePageState extends State<MyHomePage>
       ),
     );
   }
-}
-
-class SecondPage extends StatelessWidget {
-  static String routeName = "/second";
-  SecondPage() {
-    OneContext()
-        .showDialog(
-            builder: (_) => AlertDialog(
-                  content: Text(
-                      'Dialog opened from constructor of StatelessWidget SecondPage!'),
-                  actions: [
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.blue)),
-                        child: Text('Close'),
-                        onPressed: () {
-                          OneContext().popDialog("Nice!");
-                        })
-                  ],
-                ))
-        .then((result) => print(result));
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('Second Page'),
-          ElevatedButton(
-            child: Text('Go Back - pop("success")'),
-            onPressed: () {
-              // showTipsOnScreen('OneContext().pop("success")');
-              OneContext().pop('success');
-            },
-          ),
-        ],
-      )));
 }
 
 // Dont need context, so features can be create in any place ;)

@@ -37,6 +37,7 @@ mixin DialogController {
   }
 
   Future<T?> Function<T>({
+    required BuildContext context,
     required Widget Function(BuildContext) builder,
     bool? barrierDismissible,
     bool useRootNavigator,
@@ -48,6 +49,7 @@ mixin DialogController {
   })? _showDialog;
 
   Future<T?> Function<T>({
+    required BuildContext context,
     required Widget Function(BuildContext) builder,
     Color? backgroundColor,
     double? elevation,
@@ -68,6 +70,7 @@ mixin DialogController {
       SnackBar Function(BuildContext?) builder)? _showSnackBar;
 
   PersistentBottomSheetController<T> Function<T>({
+    required BuildContext context,
     Widget Function(BuildContext) builder,
     Color? backgroundColor,
     double? elevation,
@@ -82,6 +85,7 @@ mixin DialogController {
   /// Material entrance and exit animations, modal barrier color, and modal
   /// barrier behavior (dialog is dismissible with a tap on the barrier).
   Future<T?> showDialog<T>({
+    required BuildContext context,
     required Widget Function(BuildContext) builder,
     bool useRootNavigator = true,
     String? barrierLabel,
@@ -97,6 +101,7 @@ mixin DialogController {
     if (barrierDismissible == true) addDialogVisible(dialog);
 
     return _showDialog!<T>(
+      context: context,
       builder: (_) => dialog,
       barrierDismissible: barrierDismissible,
       useRootNavigator: useRootNavigator,
@@ -141,6 +146,7 @@ mixin DialogController {
   /// A modal bottom sheet is an alternative to a menu or a dialog and prevents
   /// the user from interacting with the rest of the app.
   Future<T?> showModalBottomSheet<T>({
+    required BuildContext context,
     required Widget Function(BuildContext) builder,
     Color? backgroundColor,
     double? elevation,
@@ -162,6 +168,7 @@ mixin DialogController {
     if (isDismissible == true) addDialogVisible(dialog);
 
     return _showModalBottomSheet!<T>(
+      context: context,
       builder: builder,
       backgroundColor: backgroundColor,
       clipBehavior: clipBehavior,
@@ -187,6 +194,7 @@ mixin DialogController {
   /// Returns a controller that can be used to close and otherwise manipulate the
   /// bottom sheet.
   Future<PersistentBottomSheetController<T>?> showBottomSheet<T>({
+    required BuildContext context,
     required Widget Function(BuildContext) builder,
     Color? backgroundColor,
     double? elevation,
@@ -198,6 +206,7 @@ mixin DialogController {
   }) async {
     if (!(await _contextLoaded())) return null;
     return _showBottomSheet!<T>(
+      context: context,
       builder: builder,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -212,6 +221,7 @@ mixin DialogController {
   /// Register callbacks
   void registerCallback(
       {Future<T?> Function<T>({
+        required BuildContext context,
         required Widget Function(BuildContext) builder,
         bool? barrierDismissible,
         bool useRootNavigator,
@@ -223,6 +233,7 @@ mixin DialogController {
       })?
           showDialog,
       Future<T?> Function<T>({
+        required BuildContext context,
         required Widget Function(BuildContext) builder,
         Color? backgroundColor,
         double? elevation,
@@ -243,6 +254,7 @@ mixin DialogController {
               SnackBar Function(BuildContext?) builder)?
           showSnackBar,
       PersistentBottomSheetController<T> Function<T>({
+        required BuildContext context,
         Widget Function(BuildContext)? builder,
         Color? backgroundColor,
         double? elevation,

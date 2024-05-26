@@ -59,6 +59,7 @@ class OneContext with NavigatorController, OverlayController, DialogController {
   /// Register all necessary callbacks from main widget, automatically
   void registerDialogCallback({
     Future<T?> Function<T>({
+      required BuildContext context,
       required Widget Function(BuildContext) builder,
       bool? barrierDismissible,
       bool useRootNavigator,
@@ -70,6 +71,7 @@ class OneContext with NavigatorController, OverlayController, DialogController {
     })?
         showDialog,
     Future<T?> Function<T>({
+      required BuildContext context,
       required Widget Function(BuildContext) builder,
       Color? backgroundColor,
       double? elevation,
@@ -90,6 +92,7 @@ class OneContext with NavigatorController, OverlayController, DialogController {
             SnackBar Function(BuildContext?) builder)?
         showSnackBar,
     PersistentBottomSheetController<T> Function<T>({
+      required BuildContext context,
       Widget Function(BuildContext)? builder,
       Color? backgroundColor,
       double? elevation,
@@ -102,6 +105,7 @@ class OneContext with NavigatorController, OverlayController, DialogController {
         showBottomSheet,
   }) {
     registerCallback(
+      
         showDialog: showDialog,
         showSnackBar: showSnackBar,
         showModalBottomSheet: showModalBottomSheet,
