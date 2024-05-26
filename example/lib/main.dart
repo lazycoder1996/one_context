@@ -366,13 +366,12 @@ class _MyHomePageState extends State<MyHomePage>
                   onPressed: () {
                     showTipsOnScreen('OneContext().showBottomSheet()');
                     OneContext().showBottomSheet(
-                      context: context,
-                      constraints: BoxConstraints(maxHeight: 100),
-                      builder: (context) => Container(
+                      (context) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Colors.red,
                         ),
+                        constraints: BoxConstraints(maxHeight: 100),
                         margin: EdgeInsets.all(16),
                         alignment: Alignment.topCenter,
                         height: 200,
